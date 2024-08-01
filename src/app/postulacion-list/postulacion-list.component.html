@@ -1,0 +1,50 @@
+<!-- Tabla para la visualizacion de las postulaciones almacenadas en la base de datos  -->
+<div class="table-container" *ngIf="loading">Cargando postulaciones...</div>
+<table mat-table [dataSource]="postulaciones" class="mat-elevation-z8" *ngIf="!loading">
+
+  <ng-container matColumnDef="codigo">
+    <th mat-header-cell *matHeaderCellDef> Código </th>
+    <td mat-cell *matCellDef="let postulacion"> {{ postulacion.codigo }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="rut">
+    <th mat-header-cell *matHeaderCellDef> Rut </th>
+    <td mat-cell *matCellDef="let postulacion"> {{ postulacion.rut }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tituloPostulacion">
+    <th mat-header-cell *matHeaderCellDef> Título </th>
+    <td mat-cell *matCellDef="let postulacion"> {{ postulacion.tituloPostulacion }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="facultad">
+    <th mat-header-cell *matHeaderCellDef> Facultad </th>
+    <td mat-cell *matCellDef="let postulacion"> {{ postulacion.facultad.id }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="departamento">
+    <th mat-header-cell *matHeaderCellDef> Departamento </th>
+    <td mat-cell *matCellDef="let postulacion"> {{ postulacion.departamento.id }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="correo">
+    <th mat-header-cell *matHeaderCellDef> Correo </th>
+    <td mat-cell *matCellDef="let postulacion"> {{ postulacion.correo }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+    <td mat-cell *matCellDef="let postulacion"> {{ postulacion.fecha }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let postulacion">
+      <button mat-button (click)="updatePostulacion(postulacion)">Modificar</button>
+      <button mat-button color="warn" (click)="deletePostulacion(postulacion.codigo)">Eliminar</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

@@ -1,0 +1,42 @@
+<!-- se muestra una pantalla en caso que se este cargando la postulacion -->
+<div *ngIf="loading">Cargando postulación...</div>
+
+<!-- Formulario para la edicion de una postulacion, cargando los datos previamente almacenados  -->
+<form *ngIf="!loading" (ngSubmit)="saveChanges()">
+  <mat-form-field appearance="fill">
+    <mat-label>Rut</mat-label>
+    <input matInput [(ngModel)]="postulacion.rut" name="rut" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Título de Postulación</mat-label>
+    <input matInput [(ngModel)]="postulacion.tituloPostulacion" name="tituloPostulacion" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Facultad</mat-label>
+    <mat-select [(ngModel)]="postulacion.facultad.id" name="facultad" (selectionChange)="onFacultadChange($event.value)" required>
+      <mat-option *ngFor="let facultad of facultades" [value]="facultad.facultadId">{{ facultad.facultadNombre }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Departamento</mat-label>
+    <mat-select [(ngModel)]="postulacion.departamento.id" name="departamento" required>
+      <mat-option *ngFor="let departamento of departamentos" [value]="departamento.departamentoId">{{ departamento.departamentoNombre }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Correo</mat-label>
+    <input matInput [(ngModel)]="postulacion.correo" name="correo" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha</mat-label>
+    <input matInput [value]="postulacion.fecha" disabled />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Actualizar Postulación</button>
+  <button mat-button (click)="router.navigate(['/postulaciones'])">Cancelar</button>
+</form>

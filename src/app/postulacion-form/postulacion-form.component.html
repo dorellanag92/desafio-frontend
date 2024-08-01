@@ -1,0 +1,57 @@
+<!-- Formulario para la creación de una postulación  -->
+<form [formGroup]="formulario" (ngSubmit)="saveChanges()">
+  <mat-form-field appearance="fill">
+    <mat-label>Rut</mat-label>
+    <input matInput formControlName="rut" />
+    <mat-error *ngIf="formulario.get('rut')?.hasError('required')">
+      El rut es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Título de la Postulación</mat-label>
+    <input matInput formControlName="titulo" />
+    <mat-error *ngIf="formulario.get('titulo')?.hasError('required')">
+      El título es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Facultad</mat-label>
+    <mat-select formControlName="facultad" (selectionChange)="onFacultadChange($event.value)">
+      <mat-option *ngFor="let facultad of facultades" [value]="facultad.id">
+        {{ facultad.facultadNombre }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="formulario.get('facultad')?.hasError('required')">
+      La facultad es requerida
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Departamento</mat-label>
+    <mat-select formControlName="departamento">
+      <mat-option *ngFor="let departamento of departamentos" [value]="departamento.id">
+        {{ departamento.departamentoNombre }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="formulario.get('departamento')?.hasError('required')">
+      El departamento es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Correo</mat-label>
+    <input matInput formControlName="correo" />
+    <mat-error *ngIf="formulario.get('correo')?.hasError('required')">
+      El correo es requerido
+    </mat-error>
+    <mat-error *ngIf="formulario.get('correo')?.hasError('email')">
+      El correo debe ser válido
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="loading">
+    {{ loading ? 'Enviando...' : 'Enviar' }}
+  </button>
+</form>

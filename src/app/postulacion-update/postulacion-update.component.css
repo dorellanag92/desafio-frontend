@@ -1,0 +1,25 @@
+/* Estilización del formulario para editar una postulación */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+button {
+    margin-top: 16px;
+}
+
+mat-form-field {
+    display: block;
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+mat-select {
+    display: block;
+    opacity: 1;
+}
+
+mat-option {
+    padding: 8px;
+}
