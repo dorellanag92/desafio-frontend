@@ -1,10 +1,10 @@
 export interface Facultad {
-    facultadId: number;
+    id: number;
     facultadNombre: string;
 }
 
 export interface Departamento {
-    departamentoId: number;
+    id: number;
     departamentoNombre: string;
     facultadId: number;
 }

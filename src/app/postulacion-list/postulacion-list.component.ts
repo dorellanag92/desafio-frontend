@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostulacionService } from '../services/postulacion.service';
-import { Postulacion } from '../models/models';
+import { Departamento, Facultad, Postulacion } from '../models/models';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,6 +14,8 @@ export class PostulacionListComponent implements OnInit {
   //y un atributo para verificar si está cargando o no las postulaciones
   postulaciones: Postulacion[] = [];
   displayedColumns: string[] = ['codigo', 'rut', 'tituloPostulacion', 'facultad', 'departamento', 'correo', 'fecha', 'acciones'];
+  facultades: Facultad[] = [];
+  departamentos: Departamento[] = [];
   loading = false;
 
   //manejo de operaciones de postulaciones y rutas
@@ -25,6 +27,20 @@ export class PostulacionListComponent implements OnInit {
   //Método llamado al inicializar, donde se cargan todas las postulaciones
   ngOnInit() {
     this.getPostulaciones();
+    this.getFacultades();
+    this.getDepartamentos();
+  }
+
+  getFacultades(){
+    this.postulacionService.getFacultades().subscribe(facultades => {
+      this.facultades = facultades;
+    })
+  }
+
+  getDepartamentos(){
+    this.postulacionService.getDepartamentos().subscribe(departamentos => {
+      this.departamentos = departamentos;
+    })
   }
 
   //Método para obtener las postulaciones y almacenarlas en el array anteriormente inicializado
@@ -55,4 +71,15 @@ export class PostulacionListComponent implements OnInit {
       });
     }
   }
+
+  getNombreFacultad(id: number): string{
+    const facultad = this.facultades.find(f => f.id === id);
+    return facultad ? facultad.facultadNombre : 'Desconocido';
+  }
+
+  getNombreDepartamento(id: number): string{
+    const departamento = this.departamentos.find(d => d.id === id);
+    return departamento ? departamento.departamentoNombre : 'Desconocido';
+  }
+
 }
