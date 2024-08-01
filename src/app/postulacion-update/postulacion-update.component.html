@@ -16,14 +16,14 @@
   <mat-form-field appearance="fill">
     <mat-label>Facultad</mat-label>
     <mat-select [(ngModel)]="postulacion.facultad.id" name="facultad" (selectionChange)="onFacultadChange($event.value)" required>
-      <mat-option *ngFor="let facultad of facultades" [value]="facultad.facultadId">{{ facultad.facultadNombre }}</mat-option>
+      <mat-option *ngFor="let facultad of facultades" [value]="facultad.id">{{ facultad.facultadNombre }}</mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Departamento</mat-label>
     <mat-select [(ngModel)]="postulacion.departamento.id" name="departamento" required>
-      <mat-option *ngFor="let departamento of departamentos" [value]="departamento.departamentoId">{{ departamento.departamentoNombre }}</mat-option>
+      <mat-option *ngFor="let departamento of departamentos" [value]="departamento.id">{{ departamento.departamentoNombre }}</mat-option>
     </mat-select>
   </mat-form-field>
 
